@@ -4,53 +4,28 @@
 	import { invalidateAll } from '$app/navigation';
 	import { scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	// import { db } from './firebase';
-    import { addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+	import { initializeApp } from 'firebase/app';
+	import { firebaseConfig } from "./firebase";
+	import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 	import { browser } from '$app/environment';
-	// import {db } from './+page.server';
+	import { db } from './firebase';
 
+	
 
 	export let data;
 	$: todos = data.todos;
 
-	export let counter = 0;
+	let colRef = collection(db, "todos");
 
-	// const query = db.collection('todos').where('uid', '==', uid).orderBy('created');
-
-	// function add() {
-    //     db.collection('todos').add({ uid, text, complete: false, created: Date.now() });
-	// 	// addDoc(db.collection('todos').add({ uid, text, complete: false, created: Date.now() }));
-    //     text = '';
-    // }
-
-    // function updateStatus(todo) {
-	// 	updateDoc(doc(db, "todos", todo), {
-	// 		isComplete: true
-	// 	});
-    //     // const { id, newStatus } = event.detail;
-    //     // addDoc(db.collection('todos').doc(id).update({ complete: newStatus }));
-    // }
-
-    // function removeItem(event) {
-    //     const { id } = event.detail;
-    //     addDoc(db.collection('todos').doc(id).delete());
-    // }
-
-// 	const db = browser && getFirestore();
-
-	// const colRef = browser && collection(db, "todos");
-
-
-	// const unsubscribe =
-	// browser &&
-	// onSnapshot(colRef, (querySnapshot) => {
-	// 	let fbTodos = [];
-	// 	querySnapshot.forEach((doc) => {
-	// 	let todo = { ...doc.data(), id: doc.id };
-	// 	fbTodos = [todo, ...fbTodos];
-	// 	});
-	// 	todos = fbTodos;
-	// });
+	const unsubscribe =
+	onSnapshot(colRef, (querySnapshot) => {
+		let fbTodos = [];
+		querySnapshot.forEach((doc) => {
+		let todo = { ...doc.data(), id: doc.id };
+		fbTodos = [todo, ...fbTodos];
+		});
+		todos = fbTodos;
+	});
 
 // 	const addTodo = async () => {
 //     if (task !== "") {
@@ -96,11 +71,7 @@
 		method="post"
 		use:enhance={() => {
 			// {addTodo};
-			// todo.uid = counter;
-			// counter = counter + 1; 
 			return ({ form, result }) => {
-				// form.counter = counter;
-				counter = counter + 1; 
 				if (result.type === 'success') {
 					form.reset();
 					invalidateAll();

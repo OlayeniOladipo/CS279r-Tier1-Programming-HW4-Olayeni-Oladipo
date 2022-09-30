@@ -8,13 +8,14 @@ import { addDoc, collection, updateDoc, deleteDoc, doc, onSnapshot, getFirestore
 import { browser } from '$app/environment';
 import { firebaseConfig } from "./firebase";
 import { getApp, getApps, initializeApp } from 'firebase/app';
+import { db } from './firebase';
 
 // export const firebaseApp =
 //     browser &&
 //     (getApps().length === 0 ? initializeApp(firebaseConfig) : getApp());
-initializeApp(firebaseConfig);
-const db = getFirestore();
-const colRef = collection(db, "todos");
+// initializeApp(firebaseConfig);
+// const db = getFirestore();
+// let colRef = collection(db, "todos");
 
 // const unsubscribe =
 // browser &&
@@ -58,24 +59,6 @@ export const actions = {
 	add: async ({ request, locals }) => {
 		/* Read request body, return and store in form. */
 		const form = await request.formData();
-        
-		// await updateDoc(doc(db, "todos", ))
-		// await addDoc(collection(db, "todos"));
-		// await addDoc(db.collection('todos').add({ text, complete: false, created: Date.now() }));
-		// async () => {
-		// 	//if (task !== "") {
-		// 	  const docRef = await addDoc(collection(db, "todos"), {
-		// 		task: form.get('text'),
-		// 		isComplete: false,
-		// 		createdAt: new Date(),
-		// 	  });
-		// 	//   error = "";
-		// 	// } else {
-		// 	//   error = "Task is empty";
-		// 	// }
-		// 	// task = "";
-		//   };
-
 
 		const docRef = await addDoc(collection(db, 'todos'), {
 			task: form.get('text'),
@@ -92,11 +75,7 @@ export const actions = {
 		/* Read request body, return and store in form. */
 		const form = await request.formData();
 
-		await updateDoc(doc(db, 'todos', form.get('uid')), {
-			text: form.get('text'),
-		});
-
-		// await updateDoc(docRef, {
+		// await updateDoc(doc(db, 'todos', form.get('uid')), {
 		// 	text: form.get('text'),
 		// });
 
