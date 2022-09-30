@@ -1,12 +1,80 @@
 <script>
-	/* Inpporting founctions */
+	/* Importing founctions */
 	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
+	// import { db } from './firebase';
+    import { addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+	import { browser } from '$app/environment';
+	// import {db } from './+page.server';
+
 
 	export let data;
 	$: todos = data.todos;
+
+	export let counter = 0;
+
+	// const query = db.collection('todos').where('uid', '==', uid).orderBy('created');
+
+	// function add() {
+    //     db.collection('todos').add({ uid, text, complete: false, created: Date.now() });
+	// 	// addDoc(db.collection('todos').add({ uid, text, complete: false, created: Date.now() }));
+    //     text = '';
+    // }
+
+    // function updateStatus(todo) {
+	// 	updateDoc(doc(db, "todos", todo), {
+	// 		isComplete: true
+	// 	});
+    //     // const { id, newStatus } = event.detail;
+    //     // addDoc(db.collection('todos').doc(id).update({ complete: newStatus }));
+    // }
+
+    // function removeItem(event) {
+    //     const { id } = event.detail;
+    //     addDoc(db.collection('todos').doc(id).delete());
+    // }
+
+// 	const db = browser && getFirestore();
+
+	// const colRef = browser && collection(db, "todos");
+
+
+	// const unsubscribe =
+	// browser &&
+	// onSnapshot(colRef, (querySnapshot) => {
+	// 	let fbTodos = [];
+	// 	querySnapshot.forEach((doc) => {
+	// 	let todo = { ...doc.data(), id: doc.id };
+	// 	fbTodos = [todo, ...fbTodos];
+	// 	});
+	// 	todos = fbTodos;
+	// });
+
+// 	const addTodo = async () => {
+//     if (task !== "") {
+//       const docRef = await addDoc(collection(db, "todos"), {
+//         task: task,
+//         isComplete: false,
+//         createdAt: new Date(),
+//       });
+//       error = "";
+//     } else {
+//       error = "Task is empty";
+//     }
+//     task = "";
+//   };
+
+//   const markTodoAsComplete = async (todo) => {
+//     await updateDoc(doc(db, "todos", todo.uid), {
+//       isComplete: !todo.done,
+//     });
+//   };
+
+//   const deleteTodo = async (id) => {
+//     await deleteDoc(doc(db, "todos", id));
+//   };
 </script>
 
 <!-- Insert elements into the header of the document. -->
@@ -27,7 +95,12 @@
 		action="/todos?/add"
 		method="post"
 		use:enhance={() => {
+			// {addTodo};
+			// todo.uid = counter;
+			// counter = counter + 1; 
 			return ({ form, result }) => {
+				// form.counter = counter;
+				counter = counter + 1; 
 				if (result.type === 'success') {
 					form.reset();
 					invalidateAll();
@@ -51,6 +124,7 @@
 				method="post"
 				use:enhance={({ data }) => {
 					todo.done = !!data.get('done');
+					// markTodoAsComplete(todo);
 				}}
 			>
 				<input type="hidden" name="uid" value={todo.uid} />
@@ -69,6 +143,7 @@
 				method="post"
 				use:enhance={() => {
 					todo.pending_delete = true;
+					// deleteTodo(todo.uid);
 				}}
 			>
 				<input type="hidden" name="uid" value={todo.uid} />
