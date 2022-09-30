@@ -3,11 +3,10 @@
 
 import { error } from '@sveltejs/kit';
 import { api } from './api';
-// import { db } from './firebase';
 import { addDoc, collection, updateDoc, deleteDoc, doc, onSnapshot, getFirestore} from 'firebase/firestore';
-import { browser } from '$app/environment';
-import { firebaseConfig } from "./firebase";
-import { getApp, getApps, initializeApp } from 'firebase/app';
+// import { browser } from '$app/environment';
+// import { firebaseConfig } from "./firebase";
+// import { getApp, getApps, initializeApp } from 'firebase/app';
 import { db } from './firebase';
 
 // export const firebaseApp =
@@ -60,6 +59,7 @@ export const actions = {
 		/* Read request body, return and store in form. */
 		const form = await request.formData();
 
+		// add a document into firebase collection 'todos' - with fields filled
 		const docRef = await addDoc(collection(db, 'todos'), {
 			task: form.get('text'),
 			isComplete: false,

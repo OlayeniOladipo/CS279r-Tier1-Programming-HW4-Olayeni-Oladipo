@@ -4,10 +4,10 @@
 	import { invalidateAll } from '$app/navigation';
 	import { scale } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
-	import { initializeApp } from 'firebase/app';
-	import { firebaseConfig } from "./firebase";
-	import { getFirestore, collection, onSnapshot } from "firebase/firestore";
-	import { browser } from '$app/environment';
+	// import { initializeApp } from 'firebase/app';
+	// import { firebaseConfig } from "./firebase";
+	import { collection, onSnapshot } from "firebase/firestore";
+	// import { browser } from '$app/environment';
 	import { db } from './firebase';
 
 	
@@ -124,6 +124,7 @@
 	{/each}
 </div>
 
+<!-- Already familiar with CSS from past assignments. -->
 <style>
 	.todos {
 		width: 100%;

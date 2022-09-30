@@ -1,6 +1,6 @@
 import 'firebase/firestore';
-import { getApp, getApps, initializeApp } from 'firebase/app';
-import { getFirestore, collection } from "firebase/firestore";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from "firebase/firestore";
 
 
 export var firebaseConfig = {
@@ -12,5 +12,7 @@ export var firebaseConfig = {
     appId: "1:659299973953:web:53be7d123ca9defcd9ffc0"
 };
 
+// initialize app given the firebase config and keys
 initializeApp(firebaseConfig);
+// set up database
 export let db = getFirestore();
