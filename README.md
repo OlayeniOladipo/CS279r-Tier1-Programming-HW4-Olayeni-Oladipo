@@ -30,7 +30,7 @@ On the link, play around with the following features: <br />
 3) Edit the text of the todo item by pressing the text, then editing 
 3) Press the trash icon to delete thetodo item.
 4) Firebase:
-    -  I was only able to get the adding to work in the firebase database. I have the code commented out in todo/page.server files that would make the edit and delete and markCompleted fields change in the database, but given I started with a different tutorial, it was harder to get things working (specially the doc per todo item in the database had a document key/path that I couldn't seem to access.)
+    -  I was only able to get the adding to work in the firebase database. I have the code commented out in todo/page.server files that would make the edit and delete and markCompleted fields change in the database, but given I started with a different tutorial, it was harder to get things working (especially that each doc per todo item in the database has a document key/path that I couldn't seem to access.)
 
 Worked off the code from the following sources:
 - https://github.com/fireship-io/182-svelte-firebase<br/>
@@ -39,7 +39,7 @@ Worked off the code from the following sources:
 - https://blog.logrocket.com/building-crud-application-svelte-firebase/ <br/>
 
 Comments informed by the following:
-- https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient <br />U
+- https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient <br />
 - https://developer.mozilla.org/en-US/docs/Web/CSS/inherit#:~:text=The%20inherit%20CSS%20keyword%20causes,needed%20to%20override%20another%20rule. <br />
 - https://www.w3schools.com/cssref/css_units.asp <br />
 - https://www.w3schools.com/cssref/css3_pr_box-shadow.asp <br />
