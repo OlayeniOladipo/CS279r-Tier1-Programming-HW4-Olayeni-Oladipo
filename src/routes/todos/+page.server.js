@@ -27,7 +27,6 @@ import { db } from './firebase';
 // 	todos = fbTodos;
 // });
 
-
 /* Action is load. then the async ( ) ==> does the action with data. */
 export const load = async ({ locals }) => {
 	// locals.userid comes from src/hooks.js

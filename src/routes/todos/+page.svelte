@@ -15,19 +15,19 @@
 	export let data;
 	$: todos = data.todos;
 
-	let colRef = collection(db, "todos");
+	// let colRef = collection(db, "todos");
 
-	const unsubscribe =
-	onSnapshot(colRef, (querySnapshot) => {
-		let fbTodos = [];
-		querySnapshot.forEach((doc) => {
-		let todo = { ...doc.data(), id: doc.id };
-		fbTodos = [todo, ...fbTodos];
-		});
-		todos = fbTodos;
-	});
+	// const unsubscribe =
+	// onSnapshot(colRef, (querySnapshot) => {
+	// 	let fbTodos = [];
+	// 	querySnapshot.forEach((doc) => {
+	// 	let todo = { ...doc.data(), id: doc.id };
+	// 	fbTodos = [todo, ...fbTodos];
+	// 	});
+	// 	todos = fbTodos;
+	// });
 
-// 	const addTodo = async () => {
+// const addTodo = async () => {
 //     if (task !== "") {
 //       const docRef = await addDoc(collection(db, "todos"), {
 //         task: task,
